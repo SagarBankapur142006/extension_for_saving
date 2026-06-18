@@ -1,0 +1,35 @@
+{
+  "manifest_version": 3,
+  "name": "Eco-LLM Proxy",
+  "version": "1.0.0",
+  "description": "Route AI prompts to frugal local models and estimate CO2 savings",
+  "permissions": [
+    "storage",
+    "tabs",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://chat.openai.com/*",
+    "https://chatgpt.com/*",
+    "https://claude.ai/*",
+    "https://api.electricitymap.org/*"
+  ],
+  "background": {
+    "service_worker": "src/background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://chat.openai.com/*",
+        "https://chatgpt.com/*",
+        "https://claude.ai/*"
+      ],
+      "js": ["src/content-script.js"]
+    }
+  ],
+  "action": {
+    "default_popup": "src/popup.html",
+    "default_title": "Eco-LLM Proxy"
+  }
+}
